@@ -6,7 +6,7 @@ import React, { useState } from "react";
 // import { mdiLinkedin } from '@mdi/js';
 // import { mdiGithub } from '@mdi/js';
 // import { mdiEmail } from '@mdi/js';
-
+import LiquidGlass from "liquid-glass-react";
 
 export default function Home() {
   const [language, setLanguage] = useState<'ja' | 'en'>('ja');
@@ -22,19 +22,40 @@ export default function Home() {
     }
   };
 
-  return (
-    <>
-    <div className="flex flex-col items-center justify-center min-h-screen bg-black">
-      <div className="font-noto-sans-jp text-center text-2xl text-white flex flex-col items-center justify-center">
-        <div className="mb-2 hover:scale-200 transition duration-500 ease-in-out flex justify-center items-center">
-        </div>
-        <h1>
-          <span className="font-bold text-3xl">{content[language].text1}</span><br />
-          <span className="font-bold text-3xl">{content[language].sub}</span><br />
-        </h1>
-      </div>
-      {/* Language Toggle Switch */}
-          <div className="flex items-center gap-1 ml-2 mt-10">
+  return (   
+    <div className="flex items-center justify-center min-h-screen bg-white">
+        <div className="text-center">
+          <h1>
+            <span className="font-bold text-3xl">{content[language].text1}</span><br />
+            <span className="font-bold text-3xl">{content[language].sub}</span><br />
+          </h1>
+           <div className="mt-6 flex justify-center gap-4  mb-5 items-center">
+          <a
+            href="https://linkedin.com/in/luqman-hadi/"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="flex items-center gap-2 px-4 py-2 rounded hover:bg-gray-900 text-white font-semibold transition"
+          >
+            <Icon path={mdiLinkedin} size={1} color="white" />
+          </a>
+          <a
+            href="https://github.com/luqhardy"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="flex items-center gap-2 px-4 py-2 rounded hover:bg-gray-900 text-white font-semibold transition"
+          >
+            <Icon path={mdiGithub} size={1} />
+          </a>
+                    <a
+            href="mailto:hello@luqmanhadi.com"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="flex items-center gap-2 px-4 py-2 rounded hover:bg-gray-900 text-white font-semibold transition"
+          >
+            <Icon path={mdiEmail} size={1} />
+          </a>
+          {/* Language Toggle Switch */}
+          <div className="flex items-center gap-1 ml-2">
             <button
               onClick={() => setLanguage(language === 'ja' ? 'en' : 'ja')}
               className="relative w-16 h-8 bg-gray-200 rounded-full flex items-center px-1 transition-colors duration-300 focus:outline-none border border-gray-400"
@@ -48,8 +69,9 @@ export default function Home() {
                 style={{ willChange: 'transform' }}
               />
             </button>
-            </div>
-    </div>
-    </>
+          </div>
+        </div>
+          </div>
+        </div>
   );
 }
