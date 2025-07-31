@@ -6,7 +6,7 @@ import React, { useState } from "react";
 // import { mdiLinkedin } from '@mdi/js';
 // import { mdiGithub } from '@mdi/js';
 // import { mdiEmail } from '@mdi/js';
-import LiquidGlass from "liquid-glass-react";
+//import LiquidGlass from "liquid-glass-react";
 
 export default function Home() {
   const [language, setLanguage] = useState<'ja' | 'en'>('ja');
