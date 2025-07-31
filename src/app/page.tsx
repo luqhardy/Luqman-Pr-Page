@@ -2,10 +2,10 @@
 
 // import Image from "next/image";
 import React, { useState } from "react";
-// import Icon from '@mdi/react';
-// import { mdiLinkedin } from '@mdi/js';
-// import { mdiGithub } from '@mdi/js';
-// import { mdiEmail } from '@mdi/js';
+import Icon from '@mdi/react';
+import { mdiLinkedin } from '@mdi/js';
+import { mdiGithub } from '@mdi/js';
+import { mdiEmail } from '@mdi/js';
 //import LiquidGlass from "liquid-glass-react";
 
 export default function Home() {
