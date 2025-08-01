@@ -23,7 +23,7 @@ export default function Home() {
   };
 
   return (   
-    <div className="flex items-center justify-center min-h-screen bg-white">
+    <div className="flex items-center justify-center min-h-screen">
         <div className="text-center">
           <h1>
             <span className="font-bold text-3xl">{content[language].text1}</span><br />
