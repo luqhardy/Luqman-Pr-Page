@@ -77,6 +77,14 @@ export default function Home() {
   return (
     <div className="flex flex-col items-center justify-center min-h-screen py-10">
       <h1 className="font-bold text-3xl text-center mb-2">{content[language].text1}</h1>
+      <a
+            href="https://luqmanhadi.com"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="text-blue-400 hover:underline mt-2 inline-block"
+          >
+            Return to luqmanhadi.com
+          </a>
       <h2 className="font-bold text-2xl text-center mb-6">{content[language].sub}</h2>
       <div className="flex justify-center gap-4 mb-5 items-center">
         <a
@@ -148,7 +156,7 @@ export default function Home() {
           </ul>
         </section>
       </section>
-      <div className="text-xs text-gray-500 mb-10">
+      <div className="text-xs text-gray-500 mb-10 text-center">
               <p>© 2025 Luqman Hadi</p>
               <p>All rights reserved.</p>
               </div>
