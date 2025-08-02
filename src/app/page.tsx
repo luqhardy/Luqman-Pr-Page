@@ -2,6 +2,35 @@
 
 // import Image from "next/image";
 import React, { useState, useEffect, useState as useStateAlias } from "react";
+// Simple Lightbox Modal
+function Lightbox({ src, alt, onClose }: { src: string, alt: string, onClose: () => void }) {
+  return (
+    <div
+      className="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-90"
+      onClick={onClose}
+      style={{ cursor: 'zoom-out' }}
+    >
+      <div className="relative max-w-full max-h-full flex items-center justify-center">
+        <button
+          className="absolute top-2 right-2 text-white text-3xl font-bold z-10 bg-black bg-opacity-50 rounded-full px-3 py-1 hover:bg-opacity-80"
+          onClick={e => { e.stopPropagation(); onClose(); }}
+          aria-label="Close"
+        >
+          ×
+        </button>
+        <Image
+          src={src}
+          alt={alt}
+          width={1200}
+          height={900}
+          style={{ maxWidth: '90vw', maxHeight: '80vh', objectFit: 'contain', borderRadius: '1rem', background: '#fff' }}
+          className="shadow-lg"
+          priority
+        />
+      </div>
+    </div>
+  );
+}
 import Image from "next/image";
 import Icon from '@mdi/react';
 import { mdiLinkedin } from '@mdi/js';
@@ -77,15 +106,20 @@ export default function Home() {
 
   // Gallery state
   const [galleryImages, setGalleryImages] = useStateAlias<string[]>([]);
+  const [lightbox, setLightbox] = useState<{ src: string; alt: string } | null>(null);
 
   useEffect(() => {
-    // Fetch the list of images from /public/photos
-    // Since Next.js does not allow reading the filesystem from the client,
-    // you must hardcode or fetch the list from an API or use a static import.
-    // For now, we will assume a static list for demonstration.
     setGalleryImages([
       "/photos/1.jpg",
-      // Add more as needed
+      "/photos/2.jpg",
+      "/photos/3.png",
+      "/photos/4.jpg",
+      "/photos/5.png",
+      "/photos/6.png",
+      "/photos/7.png",
+      "/photos/8.png",
+      "/photos/9.png",
+      "/photos/10.png",
     ]);
   }, []);
 
@@ -172,29 +206,34 @@ export default function Home() {
         </section>
       </section>
       {/* Masonry Gallery Section */}
-      <section className="w-full max-w-5xl px-4 mt-10">
+      <section className="w-full max-w-5xl px-2 sm:px-4 mt-10">
         <h2 className="text-2xl font-bold mb-4 text-center text-gray-800">Gallery</h2>
         <div
-          className="[column-count:1] sm:[column-count:2] md:[column-count:3] gap-4"
-          style={{ columnGap: '1rem' }}
+          className="[column-count:2] sm:[column-count:3] md:[column-count:4] gap-2 sm:gap-4"
+          style={{ columnGap: '0.5rem' }}
         >
           {galleryImages.map((src, idx) => (
             <div
               key={idx}
-              className="mb-4 break-inside-avoid rounded-lg overflow-hidden shadow-md bg-gray-100"
+              className="mb-2 sm:mb-4 break-inside-avoid rounded-lg overflow-hidden shadow-md bg-gray-100 cursor-pointer"
+              onClick={() => setLightbox({ src, alt: `Gallery photo ${idx + 1}` })}
             >
               <Image
                 src={src}
                 alt={`Gallery photo ${idx + 1}`}
-                width={600}
-                height={400}
+                width={350}
+                height={250}
                 style={{ width: '100%', height: 'auto', display: 'block', objectFit: 'cover' }}
                 className="hover:scale-105 transition-transform duration-300"
                 priority={idx < 3}
+                sizes="(max-width: 640px) 50vw, (max-width: 1024px) 33vw, 25vw"
               />
             </div>
           ))}
         </div>
+        {lightbox && (
+          <Lightbox src={lightbox.src} alt={lightbox.alt} onClose={() => setLightbox(null)} />
+        )}
       </section>
       <div className="text-xs text-gray-500 mb-10 text-center mt-10">
         <p>© 2025 Luqman Hadi</p>
