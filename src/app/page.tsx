@@ -1,4 +1,4 @@
-//"use client";
+"use client";
 
 // import Image from "next/image";
 import React, { useState } from "react";
@@ -99,14 +99,13 @@ export default function Home() {
           </h2>
           <ul className="list-disc pl-6 space-y-2">
             <li>株式会社ワオナス - 通訳・グラフィックデザイン担当（リモート）</li>
+            <li>使った技術：Microsoft Office, Google Docs, Studio.Design, Framer, Figma, Adobe Creative Cloud (Photoshop, After Effects, Premiere Pro)</li>
+            <li></li>
             <li>RGB Monster Limited (UK) - SNS担当・動画編集（リモート）</li>
+            <li>使った技術：Adobe Creative Cloud (Photoshop, After Effects, Premiere Pro)</li>
           </ul>
         </section>
       </section>
     </div>
   );
 }
-export const metadata = {
-  title: "Luqman Hadi's PR Page",
-  description: "Copytight © 2025 Luqman Hadi",
-};
