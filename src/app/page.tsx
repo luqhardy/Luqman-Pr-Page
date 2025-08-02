@@ -171,23 +171,26 @@ export default function Home() {
           </ul>
         </section>
       </section>
-      {/* Gallery Section */}
+      {/* Masonry Gallery Section */}
       <section className="w-full max-w-5xl px-4 mt-10">
         <h2 className="text-2xl font-bold mb-4 text-center text-gray-800">Gallery</h2>
-        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
+        <div
+          className="[column-count:1] sm:[column-count:2] md:[column-count:3] gap-4"
+          style={{ columnGap: '1rem' }}
+        >
           {galleryImages.map((src, idx) => (
             <div
               key={idx}
-              className="w-full aspect-[4/3] relative rounded-lg overflow-hidden shadow-md flex items-center justify-center bg-gray-100"
+              className="mb-4 break-inside-avoid rounded-lg overflow-hidden shadow-md bg-gray-100"
             >
               <Image
                 src={src}
                 alt={`Gallery photo ${idx + 1}`}
-                fill
-                style={{ objectFit: 'cover' }}
+                width={600}
+                height={400}
+                style={{ width: '100%', height: 'auto', display: 'block', objectFit: 'cover' }}
                 className="hover:scale-105 transition-transform duration-300"
                 priority={idx < 3}
-                sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
               />
             </div>
           ))}
