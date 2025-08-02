@@ -106,3 +106,7 @@ export default function Home() {
     </div>
   );
 }
+export const metadata = {
+  title: "Luqman Hadi's PR Page",
+  description: "Copytight © 2025 Luqman Hadi",
+};
