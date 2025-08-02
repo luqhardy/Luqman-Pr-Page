@@ -1,7 +1,8 @@
 "use client";
 
 // import Image from "next/image";
-import React, { useState } from "react";
+import React, { useState, useEffect, useState as useStateAlias } from "react";
+import Image from "next/image";
 import Icon from '@mdi/react';
 import { mdiLinkedin } from '@mdi/js';
 import { mdiGithub } from '@mdi/js';
@@ -73,6 +74,20 @@ export default function Home() {
       journeySubtitle: "My Journey & Experience",
     }
   };
+
+  // Gallery state
+  const [galleryImages, setGalleryImages] = useStateAlias<string[]>([]);
+
+  useEffect(() => {
+    // Fetch the list of images from /public/photos
+    // Since Next.js does not allow reading the filesystem from the client,
+    // you must hardcode or fetch the list from an API or use a static import.
+    // For now, we will assume a static list for demonstration.
+    setGalleryImages([
+      "/photos/1.jpg",
+      // Add more as needed
+    ]);
+  }, []);
 
   return (
     <div className="flex flex-col items-center justify-center min-h-screen py-10">
@@ -156,11 +171,32 @@ export default function Home() {
           </ul>
         </section>
       </section>
-      <div className="text-xs text-gray-500 mb-10 text-center">
-              <p>© 2025 Luqman Hadi</p>
-              <p>All rights reserved.</p>
-              </div>
+      {/* Gallery Section */}
+      <section className="w-full max-w-5xl px-4 mt-10">
+        <h2 className="text-2xl font-bold mb-4 text-center text-gray-800">Gallery</h2>
+        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
+          {galleryImages.map((src, idx) => (
+            <div
+              key={idx}
+              className="w-full aspect-[4/3] relative rounded-lg overflow-hidden shadow-md flex items-center justify-center bg-gray-100"
+            >
+              <Image
+                src={src}
+                alt={`Gallery photo ${idx + 1}`}
+                fill
+                style={{ objectFit: 'cover' }}
+                className="hover:scale-105 transition-transform duration-300"
+                priority={idx < 3}
+                sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
+              />
+            </div>
+          ))}
+        </div>
+      </section>
+      <div className="text-xs text-gray-500 mb-10 text-center mt-10">
+        <p>© 2025 Luqman Hadi</p>
+        <p>All rights reserved.</p>
+      </div>
     </div>
-    
   );
 }
