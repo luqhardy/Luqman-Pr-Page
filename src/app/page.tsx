@@ -15,10 +15,62 @@ export default function Home() {
     ja: {
       text1: "ルクマン　ハディ",
       sub: "",
+      intro: "私のバックグラウンドは、語学力と技術的・創造的スキルを融合させた多様な経験に基づいています。",
+      educationTitle: "🎓 学歴・資格",
+      educationSubtitle: "Education & Certifications",
+      education: [
+        "文部科学省 国費留学生 (MEXT Scholarship Recipient)",
+        "神戸電子専門学校 - AIシステム開発学科 (2025年〜)（国費留学生）",
+        "JASSO日本語教育センター - 進学課程コース (2025年卒業)（国費留学生）",
+        "関西大学 - JASSO交換留学生プログラム (2023年秋)（国費留学生）",
+        "日本語能力試験 N1 (2023年取得)",
+        "ビジネス日本語テスト J2 (2025年取得)",
+        "TOEIC® Listening & Reading Test　980点",
+        "ITパスポート試験 (2025年6月合格)",
+        "アドビ認定プロフェッショナル (Photoshop 2024)（2025年6月取得）",
+        "情報セキュリティマネジメント（2025年9月受験予定）",
+        "基本情報技術者（2026年1月受験予定）",
+      ],
+      experienceTitle: "💼 職務経歴",
+      experienceSubtitle: "Professional Experience",
+      experience: [
+        "株式会社ワオナス - 通訳・グラフィックデザイン担当（リモート）wownas.com",
+        "使った技術：Microsoft Office, Google Docs, Studio.Design, Framer, Figma, Adobe Creative Cloud (Photoshop, After Effects, Premiere Pro)",
+        "RGB Monster Limited (UK) - SNS担当・動画編集（リモート）",
+        "使った技術：Adobe Creative Cloud (Photoshop, After Effects, Premiere Pro)",
+      ],
+      journeyTitle: "📜 経歴と資格",
+      journeySubtitle: "My Journey & Experience",
     },
     en: {
       text1: "Luqman Hadi",
-      sub:"",
+      sub: "",
+      intro: "My background is based on diverse experiences that combine language skills with technical and creative abilities.",
+      educationTitle: "🎓 Education & Certifications",
+      educationSubtitle: "Education & Certifications",
+      education: [
+        "MEXT Scholarship Recipient (Japanese Government)",
+        "Kobe Institute of Computing - AI Systems Development (from 2025)",
+        "JASSO Japanese Language Education Center - Preparatory Course (Graduated 2025)",
+        "Kansai University - JASSO Exchange Program (Fall 2023)",
+        "JLPT N1 (2023)",
+        "Business Japanese Test J2 (2025)",
+        "TOEIC® Listening & Reading Test: 980/990",
+        "IT Passport Exam (Passed June 2025)",
+        "Adobe Certified Professional (Photoshop 2024, June 2025)",
+        "Information Security Management (Scheduled Sep 2025)",
+        "Fundamental Information Technology Engineer (Scheduled Jan 2026)",
+      ],
+      experienceTitle: "💼 Professional Experience",
+      experienceSubtitle: "Professional Experience",
+      experience: [
+        "Wownas Co., Ltd. - Interpreter & Graphic Designer (Remote) wownas.com",
+        "Technologies: Microsoft Office, Google Docs, Studio.Design, Framer, Figma, Adobe Creative Cloud (Photoshop, After Effects, Premiere Pro)",
+        "RGB Monster Limited (UK) - Social Media & Video Editor (Remote)",
+        "Technologies: Adobe Creative Cloud (Photoshop, After Effects, Premiere Pro)",
+      ],
+      journeyTitle: "📜 Journey & Qualifications",
+      journeySubtitle: "My Journey & Experience",
     }
   };
 
@@ -70,42 +122,37 @@ export default function Home() {
       </div>
       <section className="p-6 max-w-3xl mx-auto text-white">
         <h1 className="text-3xl font-bold mb-4">
-          📜 経歴と資格 <span className="text-lg text-gray-600">My Journey & Experience</span>
+          {content[language].journeyTitle} <span className="text-lg text-gray-600">{content[language].journeySubtitle}</span>
         </h1>
         <p className="mb-6">
-          私のバックグラウンドは、語学力と技術的・創造的スキルを融合させた多様な経験に基づいています。
+          {content[language].intro}
         </p>
         <section className="mb-8">
           <h2 className="text-2xl font-semibold mb-3">
-            🎓 学歴・資格 <span className="text-base text-gray-600">Education & Certifications</span>
+            {content[language].educationTitle} <span className="text-base text-gray-600">{content[language].educationSubtitle}</span>
           </h2>
           <ul className="list-disc pl-6 space-y-2">
-            <li>文部科学省 国費留学生 (MEXT Scholarship Recipient)</li>
-            <li>神戸電子専門学校 - AIシステム開発学科 (2025年〜)（国費留学生）</li>
-            <li>JASSO日本語教育センター - 進学課程コース (2025年卒業)（国費留学生）</li>
-            <li>関西大学 - JASSO交換留学生プログラム (2023年秋)（国費留学生）</li>
-            <li>日本語能力試験 N1 (2023年取得)</li>
-            <li>ビジネス日本語テスト J2 (2025年取得)</li>
-            <li>TOEIC® Listening & Reading Test　980点</li>
-            <li>ITパスポート試験 (2025年6月合格)</li>
-            <li>アドビ認定プロフェッショナル (Photoshop 2024)（2025年6月取得）</li>
-            <li>情報セキュリティマネジメント（2025年9月受験予定）</li>
-            <li>基本情報技術者（2026年1月受験予定）</li>
+            {content[language].education.map((item, idx) => (
+              <li key={idx}>{item}</li>
+            ))}
           </ul>
         </section>
         <section>
           <h2 className="text-2xl font-semibold mb-3">
-            💼 職務経歴 <span className="text-base text-gray-600">Professional Experience</span>
+            {content[language].experienceTitle} <span className="text-base text-gray-600">{content[language].experienceSubtitle}</span>
           </h2>
           <ul className="list-disc pl-6 space-y-2">
-            <li>株式会社ワオナス - 通訳・グラフィックデザイン担当（リモート）</li>
-            <li>使った技術：Microsoft Office, Google Docs, Studio.Design, Framer, Figma, Adobe Creative Cloud (Photoshop, After Effects, Premiere Pro)</li>
-            <li></li>
-            <li>RGB Monster Limited (UK) - SNS担当・動画編集（リモート）</li>
-            <li>使った技術：Adobe Creative Cloud (Photoshop, After Effects, Premiere Pro)</li>
+            {content[language].experience.map((item, idx) => (
+              <li key={idx}>{item}</li>
+            ))}
           </ul>
         </section>
       </section>
+      <div className="text-xs text-gray-500 mb-10">
+              <p>© 2025 Luqman Hadi</p>
+              <p>All rights reserved.</p>
+              </div>
     </div>
+    
   );
 }
