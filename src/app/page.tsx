@@ -39,6 +39,10 @@ import { mdiEmail } from '@mdi/js';
 //import LiquidGlass from "liquid-glass-react";
 
 export default function Home() {
+  // Theme state: 'system', 'light', 'dark'
+  const [theme, setTheme] = useState<'system' | 'light' | 'dark'>('system');
+  const [resolvedTheme, setResolvedTheme] = useState<'light' | 'dark'>('light');
+  // Language state
   const [language, setLanguage] = useState<'ja' | 'en'>('ja');
 
   const content = {
@@ -108,6 +112,48 @@ export default function Home() {
   const [galleryImages, setGalleryImages] = useStateAlias<string[]>([]);
   const [lightbox, setLightbox] = useState<{ src: string; alt: string } | null>(null);
 
+  // Theme effect: detect system theme and apply override
+  useEffect(() => {
+    // On mount, check localStorage for theme override
+    const stored = typeof window !== 'undefined' ? localStorage.getItem('theme-override') : null;
+    if (stored === 'light' || stored === 'dark') {
+      setTheme(stored);
+    }
+  }, []);
+
+  useEffect(() => {
+    // Listen for system theme changes
+    const mq = window.matchMedia('(prefers-color-scheme: dark)');
+    const updateTheme = () => {
+      if (theme === 'system') {
+        setResolvedTheme(mq.matches ? 'dark' : 'light');
+      }
+    };
+    mq.addEventListener('change', updateTheme);
+    updateTheme();
+    return () => mq.removeEventListener('change', updateTheme);
+  }, [theme]);
+
+  useEffect(() => {
+    // Apply theme override
+    if (theme === 'system') {
+      const isDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+      setResolvedTheme(isDark ? 'dark' : 'light');
+      localStorage.removeItem('theme-override');
+    } else {
+      setResolvedTheme(theme);
+      localStorage.setItem('theme-override', theme);
+    }
+    // Set html class for Tailwind
+    if (typeof document !== 'undefined') {
+      if (resolvedTheme === 'dark') {
+        document.documentElement.classList.add('dark');
+      } else {
+        document.documentElement.classList.remove('dark');
+      }
+    }
+  }, [theme, resolvedTheme]);
+
   useEffect(() => {
     setGalleryImages([
       "/photos/1.jpg",
@@ -124,41 +170,69 @@ export default function Home() {
   }, []);
 
   return (
-    <div className="flex flex-col items-center justify-center min-h-screen py-10">
-      <h1 className="font-bold text-3xl text-center mb-2">{content[language].text1}</h1>
-      <a
-            href="https://luqmanhadi.com"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="text-blue-400 hover:underline mt-2 inline-block"
+    <div className={`flex flex-col items-center justify-center min-h-screen py-10 transition-colors duration-300 ${resolvedTheme === 'dark' ? 'bg-gray-950' : 'bg-gray-100'}`}>
+      {/* Theme Toggle Button */}
+      <div className="fixed top-4 right-4 z-50">
+        <button
+          onClick={() => {
+            setTheme(theme === 'system' ? (resolvedTheme === 'dark' ? 'light' : 'dark') : (theme === 'dark' ? 'light' : 'dark'));
+          }}
+          className={`flex items-center gap-2 px-3 py-2 rounded-full shadow-md border transition-colors duration-300 focus:outline-none ${resolvedTheme === 'dark' ? 'bg-gray-800 border-gray-700 text-yellow-200 hover:bg-gray-700' : 'bg-white border-gray-300 text-gray-800 hover:bg-gray-200'}`}
+          aria-label="Toggle light/dark mode"
+          type="button"
+        >
+          {resolvedTheme === 'dark' ? (
+            <span role="img" aria-label="Light mode">🌞</span>
+          ) : (
+            <span role="img" aria-label="Dark mode">🌙</span>
+          )}
+          <span className="text-xs font-semibold">
+            {theme === 'system' ? 'System' : (theme === 'dark' ? 'Dark' : 'Light')}
+          </span>
+        </button>
+        {theme !== 'system' && (
+          <button
+            onClick={() => setTheme('system')}
+            className={`block mt-2 w-full px-3 py-1 rounded-full text-xs border transition-colors duration-300 focus:outline-none ${resolvedTheme === 'dark' ? 'bg-gray-900 border-gray-700 text-gray-300 hover:bg-gray-800' : 'bg-white border-gray-300 text-gray-600 hover:bg-gray-200'}`}
           >
-            Return to luqmanhadi.com
-          </a>
-      <h2 className="font-bold text-2xl text-center mb-6">{content[language].sub}</h2>
+            Use System
+          </button>
+        )}
+      </div>
+      <h1 className={`font-bold text-3xl text-center mb-2 ${resolvedTheme === 'dark' ? 'text-white' : 'text-gray-900'}`}>{content[language].text1}</h1>
+      <a
+        href="https://luqmanhadi.com"
+        target="_blank"
+        rel="noopener noreferrer"
+        className={`mt-2 inline-block underline-offset-2 ${resolvedTheme === 'dark' ? 'text-blue-300 hover:text-blue-200' : 'text-blue-600 hover:text-blue-800'} hover:underline`}
+      >
+        Return to luqmanhadi.com
+      </a>
+      <h2 className={`font-bold text-2xl text-center mb-6 ${resolvedTheme === 'dark' ? 'text-gray-300' : 'text-gray-700'}`}>{content[language].sub}</h2>
       <div className="flex justify-center gap-4 mb-5 items-center">
         <a
           href="https://linkedin.com/in/luqman-hadi/"
           target="_blank"
           rel="noopener noreferrer"
-          className="flex items-center gap-2 px-4 py-2 rounded hover:bg-gray-900 text-white font-semibold transition"
+          className={`flex items-center gap-2 px-4 py-2 rounded font-semibold transition ${resolvedTheme === 'dark' ? 'bg-gray-900 text-white hover:bg-gray-800' : 'bg-gray-200 text-gray-900 hover:bg-gray-300'}`}
         >
-          <Icon path={mdiLinkedin} size={1} color="white" />
+          <Icon path={mdiLinkedin} size={1} color={resolvedTheme === 'dark' ? 'white' : '#0A66C2'} />
         </a>
         <a
           href="https://github.com/luqhardy"
           target="_blank"
           rel="noopener noreferrer"
-          className="flex items-center gap-2 px-4 py-2 rounded hover:bg-gray-900 text-white font-semibold transition"
+          className={`flex items-center gap-2 px-4 py-2 rounded font-semibold transition ${resolvedTheme === 'dark' ? 'bg-gray-900 text-white hover:bg-gray-800' : 'bg-gray-200 text-gray-900 hover:bg-gray-300'}`}
         >
-          <Icon path={mdiGithub} size={1} />
+          <Icon path={mdiGithub} size={1} color={resolvedTheme === 'dark' ? 'white' : '#333'} />
         </a>
         <a
           href="mailto:hello@luqmanhadi.com"
           target="_blank"
           rel="noopener noreferrer"
-          className="flex items-center gap-2 px-4 py-2 rounded hover:bg-gray-900 text-white font-semibold transition"
+          className={`flex items-center gap-2 px-4 py-2 rounded font-semibold transition ${resolvedTheme === 'dark' ? 'bg-gray-900 text-white hover:bg-gray-800' : 'bg-gray-200 text-gray-900 hover:bg-gray-300'}`}
         >
-          <Icon path={mdiEmail} size={1} />
+          <Icon path={mdiEmail} size={1} color={resolvedTheme === 'dark' ? 'white' : '#EA4335'} />
         </a>
       </div>
       {/* Language Toggle Switch */}
@@ -177,16 +251,16 @@ export default function Home() {
           />
         </button>
       </div>
-      <section className="p-6 max-w-3xl mx-auto text-white">
+      <section className={`p-6 max-w-3xl mx-auto ${resolvedTheme === 'dark' ? 'text-white' : 'text-gray-900'}`}>
         <h1 className="text-3xl font-bold mb-4">
-          {content[language].journeyTitle} <span className="text-lg text-gray-600">{content[language].journeySubtitle}</span>
+          {content[language].journeyTitle} <span className={`text-lg ${resolvedTheme === 'dark' ? 'text-gray-400' : 'text-gray-600'}`}>{content[language].journeySubtitle}</span>
         </h1>
         <p className="mb-6">
           {content[language].intro}
         </p>
         <section className="mb-8">
           <h2 className="text-2xl font-semibold mb-3">
-            {content[language].educationTitle} <span className="text-base text-gray-600">{content[language].educationSubtitle}</span>
+            {content[language].educationTitle} <span className={`text-base ${resolvedTheme === 'dark' ? 'text-gray-400' : 'text-gray-600'}`}>{content[language].educationSubtitle}</span>
           </h2>
           <ul className="list-disc pl-6 space-y-2">
             {content[language].education.map((item, idx) => (
@@ -196,7 +270,7 @@ export default function Home() {
         </section>
         <section>
           <h2 className="text-2xl font-semibold mb-3">
-            {content[language].experienceTitle} <span className="text-base text-gray-600">{content[language].experienceSubtitle}</span>
+            {content[language].experienceTitle} <span className={`text-base ${resolvedTheme === 'dark' ? 'text-gray-400' : 'text-gray-600'}`}>{content[language].experienceSubtitle}</span>
           </h2>
           <ul className="list-disc pl-6 space-y-2">
             {content[language].experience.map((item, idx) => (
@@ -207,7 +281,7 @@ export default function Home() {
       </section>
       {/* Masonry Gallery Section */}
       <section className="w-full max-w-5xl px-2 sm:px-4 mt-10">
-        <h2 className="text-2xl font-bold mb-4 text-center text-gray-800">Gallery</h2>
+        <h2 className={`text-2xl font-bold mb-4 text-center ${resolvedTheme === 'dark' ? 'text-gray-100' : 'text-gray-800'}`}>Gallery</h2>
         <div
           className="[column-count:2] sm:[column-count:3] md:[column-count:4] gap-2 sm:gap-4"
           style={{ columnGap: '0.5rem' }}
@@ -215,7 +289,7 @@ export default function Home() {
           {galleryImages.map((src, idx) => (
             <div
               key={idx}
-              className="mb-2 sm:mb-4 break-inside-avoid rounded-lg overflow-hidden shadow-md bg-gray-100 cursor-pointer"
+              className={`mb-2 sm:mb-4 break-inside-avoid rounded-lg overflow-hidden shadow-md cursor-pointer ${resolvedTheme === 'dark' ? 'bg-gray-800' : 'bg-gray-100'}`}
               onClick={() => setLightbox({ src, alt: `Gallery photo ${idx + 1}` })}
             >
               <Image
@@ -235,7 +309,7 @@ export default function Home() {
           <Lightbox src={lightbox.src} alt={lightbox.alt} onClose={() => setLightbox(null)} />
         )}
       </section>
-      <div className="text-xs text-gray-500 mb-10 text-center mt-10">
+      <div className={`text-xs mb-10 text-center mt-10 ${resolvedTheme === 'dark' ? 'text-gray-500' : 'text-gray-500'}`}>
         <p>© 2025 Luqman Hadi</p>
         <p>All rights reserved.</p>
       </div>
