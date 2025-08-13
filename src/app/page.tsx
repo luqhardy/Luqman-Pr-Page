@@ -36,7 +36,8 @@ import Icon from '@mdi/react';
 import { mdiLinkedin } from '@mdi/js';
 import { mdiGithub } from '@mdi/js';
 import { mdiEmail } from '@mdi/js';
-import { Analytics } from "@vercel/analytics/next"
+import { Analytics } from "@vercel/analytics/react";
+// import { Analytics } from "@vercel/analytics/next"
 //import LiquidGlass from "liquid-glass-react";
 
 export default function Home() {
