@@ -36,6 +36,7 @@ import Icon from '@mdi/react';
 import { mdiLinkedin } from '@mdi/js';
 import { mdiGithub } from '@mdi/js';
 import { mdiEmail } from '@mdi/js';
+import { Analytics } from "@vercel/analytics/next"
 //import LiquidGlass from "liquid-glass-react";
 
 export default function Home() {
@@ -170,7 +171,9 @@ export default function Home() {
   }, []);
 
   return (
-    <div className={`flex flex-col items-center justify-center min-h-screen py-10 transition-colors duration-300 ${resolvedTheme === 'dark' ? 'bg-gray-950' : 'bg-gray-100'}`}>
+    <>
+      <Analytics />
+      <div className={`flex flex-col items-center justify-center min-h-screen py-10 transition-colors duration-300 ${resolvedTheme === 'dark' ? 'bg-gray-950' : 'bg-gray-100'}`}>
       {/* Theme Toggle Button */}
       <div className="fixed top-4 right-4 z-50">
         <button
@@ -313,6 +316,7 @@ export default function Home() {
         <p>© 2025 Luqman Hadi</p>
         <p>All rights reserved.</p>
       </div>
-    </div>
+      </div>
+    </>
   );
 }
