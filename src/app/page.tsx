@@ -71,7 +71,7 @@ export default function Home() {
       experienceSubtitle: "Professional Experience",
       experience: [
         "株式会社ワオナス - 通訳・グラフィックデザイン担当（リモート）wownas.com",
-        "使った技術：Notion, Microsoft Office, Google Docs, Studio.Design, Framer, Canva, Figma, Adobe Creative Cloud (Acrobat, Photoshop, Illustator, After Effects, Premiere Pro)",
+        "使った技術：HTML, CSS, JS, Slack, Notion, Microsoft Office, Google Docs, Studio.Design, Framer, Canva, Figma, Adobe Creative Cloud (Acrobat, Photoshop, Illustator, After Effects, Premiere Pro)",
         "RGB Monster Limited (UK) - SNS担当・動画編集（リモート）",
         "使った技術：Notion, Canva, Adobe Creative Cloud (Acrobat, Photoshop, Illustator, After Effects, Premiere Pro)",
       ],
@@ -101,7 +101,7 @@ export default function Home() {
       experienceSubtitle: "Professional Experience",
       experience: [
         "Wownas Co., Ltd. - Interpreter & Graphic Designer (Remote) wownas.com",
-        "Skills: Slack, Notion, Microsoft Office, Google Docs, Studio.Design, Framer, Canva, Figma, Adobe Creative Cloud (Acrobat, Photoshop, Illustator, After Effects, Premiere Pro)",
+        "Skills: HTML, CSS, JS, Slack, Notion, Microsoft Office, Google Docs, Studio.Design, Framer, Canva, Figma, Adobe Creative Cloud (Acrobat, Photoshop, Illustator, After Effects, Premiere Pro)",
         "RGB Monster Limited (UK) - Social Media & Video Editor (Remote)",
         "Skills: Notion, Canva, Adobe Creative Cloud (Acrobat, Photoshop, Illustator, After Effects, Premiere Pro)",
       ],
