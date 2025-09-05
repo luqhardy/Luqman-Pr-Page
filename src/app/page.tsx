@@ -168,6 +168,7 @@ export default function Home() {
       "/photos/8.png",
       "/photos/9.png",
       "/photos/10.png",
+      "photos/11.png",
     ]);
   }, []);
 
