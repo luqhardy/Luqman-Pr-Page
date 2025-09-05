@@ -36,6 +36,7 @@ import Icon from '@mdi/react';
 import { mdiLinkedin } from '@mdi/js';
 import { mdiGithub } from '@mdi/js';
 import { mdiEmail } from '@mdi/js';
+import LinkedInFeed from './LinkedInFeed';
 import { Analytics } from "@vercel/analytics/react";
 // import { Analytics } from "@vercel/analytics/next"
 //import LiquidGlass from "liquid-glass-react";
@@ -334,6 +335,13 @@ export default function Home() {
           <Lightbox src={lightbox.src} alt={lightbox.alt} onClose={() => setLightbox(null)} />
         )}
       </section>
+
+      {/* LinkedIn Feed Section */}
+      <section className="w-full max-w-5xl px-2 sm:px-4 mt-10">
+        <h2 className={`text-2xl font-bold mb-4 text-center ${resolvedTheme === 'dark' ? 'text-gray-100' : 'text-gray-800'}`}>LinkedIn Posts</h2>
+        <LinkedInFeed />
+      </section>
+
       <div className={`text-xs mb-10 text-center mt-10 ${resolvedTheme === 'dark' ? 'text-gray-500' : 'text-gray-500'}`}>
         <p>© 2025 Luqman Hadi</p>
         <p>All rights reserved.</p>
