@@ -255,6 +255,26 @@ export default function Home() {
           />
         </button>
       </div>
+
+      {/* Announcement Section */}
+      <div className={`max-w-2xl mx-auto mb-8 p-6 rounded-xl border-2 shadow-lg transition-colors duration-300 ${resolvedTheme === 'dark' ? 'bg-gray-900 border-yellow-400 text-yellow-100' : 'bg-yellow-50 border-yellow-400 text-yellow-900'}`}
+        style={{ fontSize: '1.08rem', lineHeight: '1.7' }}
+      >
+        <div className="mb-2 text-lg font-bold flex items-center gap-2">
+          <span role="img" aria-label="Trophy">🏆</span>
+          <span>Announcement</span>
+        </div>
+        <div className="mb-2">
+          I am thrilled to announce that I have been selected as the winner of the 『ナノコネ コンペ形式インターンシップ』 (Nanoconnect Competition-Style Internship), hosted by 株式会社ナノコネクト (NANO CONNECT Inc.). My project, 『ナノメーター』 (<a href="https://nanometer.luqmanhadi.com" className="underline hover:text-blue-600 dark:hover:text-blue-300" target="_blank" rel="noopener noreferrer">nanometer.luqmanhadi.com</a>), was chosen from over 300 submissions by university students across Japan.<br/>
+          『ナノメーター』 is a web application built with Next.js, TypeScript, Tailwind CSS, and Firebase. I am incredibly grateful for this recognition and would like to extend my sincere thanks to the team at NANO CONNECT Inc. for this valuable opportunity. This experience has further solidified my passion for front-end development and creating user-centric solutions.
+        </div>
+        <div className="border-t border-yellow-300 my-3" />
+        <div>
+          この度、株式会社ナノコネクト様主催の『ナノコネ コンペ形式インターンシップ』において、最優秀賞を受賞いたしましたことをご報告申し上げます。<br/>
+          全国300名以上の大学生の中から、私のNext.js/React.jsプロジェクト『ナノメーター』（<a href="https://nanometer.luqmanhadi.com" className="underline hover:text-blue-600 dark:hover:text-blue-300" target="_blank" rel="noopener noreferrer">https://nanometer.luqmanhadi.com</a>）を選出していただきました。このアプリケーションは、React、TypeScript、Tailwind CSS、Firebaseを用いて開発しました。<br/>
+          このような素晴らしい機会をいただき、株式会社ナノコネクトの皆様には心より感謝申し上げます。今回の経験を糧に、今後もフロントエンド開発のスキルを磨き、ユーザー中心のソリューション開発に貢献していきたいと考えております。
+        </div>
+      </div>
       <section className={`p-6 max-w-3xl mx-auto ${resolvedTheme === 'dark' ? 'text-white' : 'text-gray-900'}`}>
         <h1 className="text-3xl font-bold mb-4">
           {content[language].journeyTitle} <span className={`text-lg ${resolvedTheme === 'dark' ? 'text-gray-400' : 'text-gray-600'}`}>{content[language].journeySubtitle}</span>
