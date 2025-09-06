@@ -6,7 +6,7 @@ import React, { useState, useEffect, useState as useStateAlias } from "react";
 function Lightbox({ src, alt, onClose }: { src: string, alt: string, onClose: () => void }) {
   return (
     <div
-      className="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-90 transition-opacity duration-300 padding-10"
+      className="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-90 transition-opacity duration-300 p-10 m-10"
       onClick={onClose}
       style={{ cursor: 'zoom-out' }}
     >
