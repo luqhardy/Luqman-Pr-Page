@@ -259,7 +259,7 @@ export default function Home() {
       </div>
 
       {/* Announcement Section */}
-      <div className={`max-w-2xl mx-auto mb-8 p-4 sm:p-6 rounded-xl border-2 shadow-lg transition-colors duration-300 text-sm sm:text-base leading-relaxed ${resolvedTheme === 'dark' ? 'bg-gray-900 border-yellow-400 text-yellow-100' : 'bg-yellow-50 border-yellow-400 text-yellow-900'}`}>
+      <div className={`max-w-2xl w-full mx-4 sm:mx-auto mb-8 p-4 sm:p-6 rounded-xl border-2 shadow-lg transition-colors duration-300 text-sm sm:text-base leading-relaxed ${resolvedTheme === 'dark' ? 'bg-gray-900 border-yellow-400 text-yellow-100' : 'bg-yellow-50 border-yellow-400 text-yellow-900'}`}>
         <div className="mb-2 text-lg font-bold flex items-center gap-2">
           <span role="img" aria-label="Trophy">🏆</span>
           <span>Announcement</span>
