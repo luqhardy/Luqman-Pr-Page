@@ -36,6 +36,21 @@ import Icon from '@mdi/react';
 import { mdiLinkedin } from '@mdi/js';
 import { mdiGithub } from '@mdi/js';
 import { mdiEmail } from '@mdi/js';
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardHeader,
+  CardTitle,
+} from "@/components/ui/card";
+import {
+  Accordion,
+  AccordionContent,
+  AccordionItem,
+  AccordionTrigger,
+} from "@/components/ui/accordion";
+import { Badge } from "@/components/ui/badge";
+import { Button } from "@/components/ui/button";
 import LinkedInFeed from './LinkedInFeed';
 import { Analytics } from "@vercel/analytics/react";
 // import { Analytics } from "@vercel/analytics/next"
@@ -171,14 +186,14 @@ export default function Home() {
       "/photos/8.png",
       "/photos/9.png",
       "/photos/10.png",
-      "photos/11-2.png",
+      "/photos/11-2.png",
     ]);
   }, []);
 
   return (
     <>
       <Analytics />
-      <div className={`flex flex-col items-center justify-center min-h-screen py-10 transition-colors duration-300 ${resolvedTheme === 'dark' ? 'bg-gray-950' : 'bg-gray-100'}`}>
+      <div className={`flex flex-col items-center justify-center min-h-screen py-10 px-4 sm:px-6 lg:px-8 transition-colors duration-300 ${resolvedTheme === 'dark' ? 'bg-gray-950' : 'bg-gray-100'}`}>
       {/* Theme Toggle Button */}
       <div className="fixed top-4 right-4 z-50">
         <button
@@ -217,31 +232,34 @@ export default function Home() {
         Return to luqmanhadi.com
       </a>
       <h2 className={`font-bold text-2xl text-center mb-6 ${resolvedTheme === 'dark' ? 'text-gray-300' : 'text-gray-700'}`}>{content[language].sub}</h2>
-      <div className="flex justify-center gap-4 mb-5 items-center">
-        <a
-          href="https://linkedin.com/in/luqman-hadi/"
-          target="_blank"
-          rel="noopener noreferrer"
-          className={`flex items-center gap-2 px-4 py-2 rounded font-semibold transition ${resolvedTheme === 'dark' ? 'bg-gray-900 text-white hover:bg-gray-800' : 'bg-gray-200 text-gray-900 hover:bg-gray-300'}`}
-        >
-          <Icon path={mdiLinkedin} size={1} color={resolvedTheme === 'dark' ? 'white' : '#0A66C2'} />
-        </a>
-        <a
-          href="https://github.com/luqhardy"
-          target="_blank"
-          rel="noopener noreferrer"
-          className={`flex items-center gap-2 px-4 py-2 rounded font-semibold transition ${resolvedTheme === 'dark' ? 'bg-gray-900 text-white hover:bg-gray-800' : 'bg-gray-200 text-gray-900 hover:bg-gray-300'}`}
-        >
-          <Icon path={mdiGithub} size={1} color={resolvedTheme === 'dark' ? 'white' : '#333'} />
-        </a>
-        <a
-          href="mailto:hello@luqmanhadi.com"
-          target="_blank"
-          rel="noopener noreferrer"
-          className={`flex items-center gap-2 px-4 py-2 rounded font-semibold transition ${resolvedTheme === 'dark' ? 'bg-gray-900 text-white hover:bg-gray-800' : 'bg-gray-200 text-gray-900 hover:bg-gray-300'}`}
-        >
-          <Icon path={mdiEmail} size={1} color={resolvedTheme === 'dark' ? 'white' : '#EA4335'} />
-        </a>
+      <div className="flex justify-center gap-2 mb-5 items-center">
+        <Button variant="ghost" size="icon" asChild>
+          <a
+            href="https://linkedin.com/in/luqman-hadi/"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            <Icon path={mdiLinkedin} size={1} />
+          </a>
+        </Button>
+        <Button variant="ghost" size="icon" asChild>
+          <a
+            href="https://github.com/luqhardy"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            <Icon path={mdiGithub} size={1} />
+          </a>
+        </Button>
+        <Button variant="ghost" size="icon" asChild>
+          <a
+            href="mailto:hello@luqmanhadi.com"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            <Icon path={mdiEmail} size={1} />
+          </a>
+        </Button>
       </div>
       {/* Language Toggle Switch */}
       <div className="flex items-center gap-1 ml-2 mb-8">
@@ -277,34 +295,57 @@ export default function Home() {
           このような素晴らしい機会をいただき、株式会社ナノコネクトの皆様には心より感謝申し上げます。今回の経験を糧に、今後もフロントエンド開発のスキルを磨き、ユーザー中心のソリューション開発に貢献していきたいと考えております。
         </div>
       </div>
-      <section className={`p-6 max-w-3xl mx-auto ${resolvedTheme === 'dark' ? 'text-white' : 'text-gray-900'}`}>
-        <h1 className="text-3xl font-bold mb-4">
-          {content[language].journeyTitle} <span className={`text-lg ${resolvedTheme === 'dark' ? 'text-gray-400' : 'text-gray-600'}`}>{content[language].journeySubtitle}</span>
-        </h1>
-        <p className="mb-6">
-          {content[language].intro}
-        </p>
-        <section className="mb-8">
-          <h2 className="text-2xl font-semibold mb-3">
-            {content[language].educationTitle} <span className={`text-base ${resolvedTheme === 'dark' ? 'text-gray-400' : 'text-gray-600'}`}>{content[language].educationSubtitle}</span>
-          </h2>
-          <ul className="list-disc pl-6 space-y-2">
-            {content[language].education.map((item, idx) => (
-              <li key={idx}>{item}</li>
-            ))}
-          </ul>
-        </section>
-        <section>
-          <h2 className="text-2xl font-semibold mb-3">
-            {content[language].experienceTitle} <span className={`text-base ${resolvedTheme === 'dark' ? 'text-gray-400' : 'text-gray-600'}`}>{content[language].experienceSubtitle}</span>
-          </h2>
-          <ul className="list-disc pl-6 space-y-2">
-            {content[language].experience.map((item, idx) => (
-              <li key={idx}>{item}</li>
-            ))}
-          </ul>
-        </section>
-      </section>
+      <Card className="w-full max-w-3xl mx-auto">
+        <CardHeader>
+          <CardTitle className="text-2xl sm:text-3xl font-bold">
+            {content[language].journeyTitle}
+          </CardTitle>
+          <CardDescription>{content[language].journeySubtitle}</CardDescription>
+        </CardHeader>
+        <CardContent>
+          <p className="mb-6">{content[language].intro}</p>
+          <Accordion type="single" collapsible className="w-full">
+            <AccordionItem value="education">
+              <AccordionTrigger className="text-xl sm:text-2xl font-semibold">
+                {content[language].educationTitle}
+              </AccordionTrigger>
+              <AccordionContent>
+                <ul className="list-disc pl-6 space-y-2 mt-2">
+                  {content[language].education.map((item, idx) => (
+                    <li key={idx}>{item}</li>
+                  ))}
+                </ul>
+              </AccordionContent>
+            </AccordionItem>
+            <AccordionItem value="experience">
+              <AccordionTrigger className="text-xl sm:text-2xl font-semibold">
+                {content[language].experienceTitle}
+              </AccordionTrigger>
+              <AccordionContent>
+                <ul className="list-disc pl-6 space-y-4 mt-2">
+                  {content[language].experience.map((item, idx) => {
+                    const parts = item.split(":");
+                    const title = parts[0];
+                    const skills = parts[1] ? parts[1].split(",").map(s => s.trim()) : [];
+                    return (
+                      <li key={idx}>
+                        {title}
+                        {skills.length > 0 && (
+                          <div className="flex flex-wrap gap-2 mt-2">
+                            {skills.map((skill, sIdx) => (
+                              <Badge key={sIdx} variant="secondary">{skill}</Badge>
+                            ))}
+                          </div>
+                        )}
+                      </li>
+                    );
+                  })}
+                </ul>
+              </AccordionContent>
+            </AccordionItem>
+          </Accordion>
+        </CardContent>
+      </Card>
       {/* Masonry Gallery Section */}
       <section className="w-full max-w-5xl px-2 sm:px-4 mt-10">
         <h2 className={`text-2xl font-bold mb-4 text-center ${resolvedTheme === 'dark' ? 'text-gray-100' : 'text-gray-800'}`}>Gallery</h2>
