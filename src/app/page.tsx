@@ -176,6 +176,7 @@ export default function Home() {
 
   useEffect(() => {
     setGalleryImages([
+      "/photos/expo.png",
       "/photos/1.jpg",
       "/photos/2.jpg",
       "/photos/3.png",
